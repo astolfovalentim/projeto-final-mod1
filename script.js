@@ -1,17 +1,17 @@
-// O TREINAMENTO CRUEL DE PAI MEI
+// PROJETO FINAL DO MÓDULO 1
 
 const prompt = require("prompt-sync")();
 
-// Variáveis e listas-----------------------------------------------------------------------------------------------------
+//Listas e variáveis-----------------------------------------------------------------------------------------------------
 
 // Lista de perguntas
 
 const intros = [
   "Antes de partir, Bill te aconselhou a tratar Pai Mei com absoluto respeito e não demonstrar, nem mesmo no olhar, nenhuma arrogância ou petulância.\n\n",
-  "Hoje seu treino será subir e descer a enorme escadaria do templo carregando dois baldes cheios de água.",
-  "O treinamento de hoje será quebrar a madeira com um soco",
-  "O aprendizado de hoje será o uso da espada. Ótima oportunidade para aumentar seu status",
-  "Hoje será o treino de meditação. Você vai aprender a meditar como um grande mestre.",
+  "Hoje seu treino será subir e descer a enorme escadaria do templo carregando dois baldes cheios de água.\n\n",
+  "O treinamento de hoje será quebrar a madeira com um soco.\n\n",
+  "O aprendizado de hoje será o uso da espada. Ótima oportunidade para aumentar seu status.\n\n",
+  "Hoje será o treino de meditação. Você vai aprender a meditar como um grande mestre.\n\n",
 ];
 
 const questions = [
@@ -24,19 +24,19 @@ const questions = [
 
 // Lista de reações às perguntas
 const response = [
-  "\n\n>>> Você foi sábia ao aceitar o conselho de Bill. Parabéns! Aumentou seu status. <<<",
-  "\n\n>>> Você provou que está disposta a desenvolver sua força mental e física. Seu status cresceu. <<<",
-  "\n\n>>> Você foi muito bem. Aumentou seus atributos físicos e mentais <<<",
-  "\n\n>>> Você aprendeu direitinho. Ganhou mais pontos em seus atributos <<<",
-  "\n\n>>> Você aprendeu a dominar sua mente. Seu status cresceu exponencialmente <<<",
+  "\n\n>>> Você foi sábia ao aceitar o conselho de Bill. Parabéns! Aumentou seu status. <<<\n\n",
+  "\n\n>>> Você provou que está disposta a desenvolver sua força mental e física. Seu status aumentou. <<<\n\n",
+  "\n\n>>> Você foi muito bem. Aumentou seus atributos físicos e mentais <<<\n\n",
+  "\n\n>>> Você aprendeu direitinho. Ganhou mais pontos em seus atributos <<<\n\n",
+  "\n\n>>> Você aprendeu a dominar sua mente. Seu status cresceu exponencialmente <<<\n\n",
 ];
 
 const negative = [
-  "\n\n>>> Você não foi sábia ao rejeitar o conselho de Bill. Perdeu pontos no seu status! <<<",
-  "\n\n>>> Você desistiu antes de começar. Não vai chegar até o final. <<<",
-  "\n\n>>> Você é um fiasco. Melhor ir embora. <<<",
-  "\n\n>>> Você está cada vez mais fraca. Pare de treinar. <<<",
-  "\n\n>>> Você é incapaz de dominar sua mente. Desista e suma daqui. <<<",
+  "\n\n>>> Você não foi sábia ao rejeitar o conselho de Bill. Perdeu pontos no seu status! <<<\n\n",
+  "\n\n>>> Você desistiu antes de começar. Não vai chegar até o final. <<<\n\n",
+  "\n\n>>> Você é um fiasco. Melhor ir embora. <<<\n\n",
+  "\n\n>>> Você está cada vez mais fraca. Pare de treinar. <<<\n\n",
+  "\n\n>>> Você é incapaz de dominar sua mente. Desista e suma daqui. <<<\n\n",
 ];
 
 // >>>>> variáveis para armazenar Status do Personagem <<<<<
@@ -44,7 +44,8 @@ let forceDay = 0;
 let abilityDay = 0;
 let wisdowDay = 0;
 let resistanceDay = 0;
-let td = 0; // >>>>>> Variável para controle da passagem do tempo <<<<<<<<
+// >>>>>> Variável para controle da passagem do tempo <<<<<<<<
+let td = 0;
 let newgame = 0;
 
 // Textos-----------------------------------------------------------------------------------------------------------------
@@ -61,13 +62,11 @@ Para ter mais oportunidades de vencer, você precisa aumentar os seguintes atrib
   \n\t[4] Resistência\n`;
 
 let screenStatusAttributes = `\n\n\tSTATUS ATUAL\n\t------------\n
-  \tPara receber o treinamento de um novo mestre, você esvaziou sua mente e zerou seus atributos.\n\n`;
+  \tAntes de começar seu treinamento, esse são seus atributos.\n\n`;
 
 // FUNÇÕES----------------------------------------------------------------------------------------------------------------
 
 function combate() {
-  // Váriaveis e listas-------------------------------------------------------------------
-
   const description = `\n\t>>>>>>>> VAI COMEÇAR O COMBATE! <<<<<<<<
 \n\t As regras são:
 \n\t - ataque ganha da magia, mas perde para defesa;
@@ -109,7 +108,7 @@ function combate() {
   for (let round = 0; round < roundsNum; round++) {
     roundsCont.push("1");
 
-    //Escolha do PC------------------------------------------------------------------------
+    //Escolha do oponente--------------------------------------------------------------------
 
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -204,7 +203,7 @@ function combate() {
 
   if (pointsPlayer.length > pointsPc.length) {
     console.log(
-      `\n\t>>>>>>>> YOU WINS!!!! <<<<<<<<\n\nVocê é o grande campeão do combate! Se mostrou um digno discípulo de Pai Mei!!!!\n\n`
+      `\n\t>>>>>>>> YOU WINS!!!! <<<<<<<<\n\nVocê venceu o combate! Se mostrou uma digna discípula do Pai Mei!!!!\n\n`
     );
   } else if (pointsPlayer.length == pointsPc.length) {
     console.log(`\n\tEMPATE!! - o combate terminou empatado!\n\n`);
@@ -214,26 +213,30 @@ function combate() {
 }
 console.log(`\n\tFim do combate. Até a próxima!\n\n`);
 
-// Função para perguntas
+// Função para perguntas que alteram o Status do personagem
+
 function quest() {
   let r = 0;
   while (r < 1) {
     let resposta = prompt(questions[td]).trim().toUpperCase();
     if (resposta == "S") {
+      console.clear();
       console.log(response[td]);
       pt++;
       r++;
     } else if (resposta == "N") {
+      console.clear();
       console.log(negative[td]);
       pt--;
       r++;
     } else if (resposta != "S" || resposta != "N") {
+      console.clear();
       console.log(`\n\n\t --> Digite somente "s" ou "n"!<--\n\n `);
     }
   }
 }
 
-// Função para calcular media
+// Função para calcular media do Status
 function statusMedia(a, b, c, d) {
   const calcStatusMedia = parseInt((a + b + c + d) / 4) / 13;
   return calcStatusMedia;
@@ -244,7 +247,6 @@ function statusMedia(a, b, c, d) {
 // Objeto Status do jogador
 
 const kiddo = {
-  name: "Beatrix Kiddo",
   force: 0,
   ability: 0,
   wisdow: 0,
@@ -269,20 +271,12 @@ const kiddo = {
     return (this.resistance = this.resistance + resistanceDay);
   },
 
-  // Método para controle passivo da passagem do tempo
+  // Método para controle da passagem do tempo
 
   day: function () {
     this.trainingDay++;
   },
-
-  //Método de aumento passivo da resistência por dia de treinamento
-
-  res: function () {
-    this.resistance++;
-  },
 };
-
-// Objeto para perguntas
 
 // Console ---------------------------------------------------------------------------------------------------------------
 
@@ -291,7 +285,9 @@ while (true) {
 
   console.clear();
   console.log(background);
-  prompt(`\n  => Pressione ENTER para o status atual dos seus atributos: \n\n`);
+  prompt(
+    `\n  => Pressione ENTER para ver o status atual dos seus atributos: \n\n`
+  );
   console.clear();
 
   //Tela de Status dos atributos
@@ -304,49 +300,40 @@ while (true) {
   console.log(` \n\tSua habilidade é ${kiddo.ability};`);
   console.log(` \n\tSua sabedoria é ${kiddo.wisdow};`);
   console.log(` \n\tSua resistência é ${kiddo.resistance};`);
-  prompt(`\n\n\t=> Pressione ENTER continuar: \n\n`);
+  prompt(`\n\n\t=> Pressione ENTER para continuar: \n\n`);
   console.clear();
 
-  //Dia de treinamento 0 -------------------------------------------------------------
+  //Dia do treinamento -------------------------------------------------------------
   pt = 0;
-  while (pt < 5) {
-    while (td < 5) {
-      console.log(`>>>> Dia de treinamento ${td} <<<<\n\n`);
-      console.log(intros[td]);
-      quest();
 
-      forceDay = pt + forceDay;
-      abilityDay = pt + abilityDay;
-      wisdowDay = pt + wisdowDay;
-      resistanceDay = pt + resistanceDay;
+  while (td < 5) {
+    console.log(`>>>> Dia de treinamento ${td} <<<<\n\n`);
+    console.log(intros[td]);
 
-      kiddo.forceSum();
-      kiddo.abilitySum();
-      kiddo.wisdowSum();
-      kiddo.resistanceSum();
-      console.log(`Você treinou ${kiddo.trainingDay} dia(s).`);
-      console.log(`\n\n\nSua força é ${kiddo.force}`);
-      console.log(`Sua habilidade é ${kiddo.ability}`);
-      console.log(`Sua sabedoria é ${kiddo.wisdow}`);
-      console.log(`Sua resistência é ${kiddo.resistance}`);
+    quest();
 
-      // teste
-      console.log(`O pt é ${pt}`);
-      console.log(`O td é ${td}`);
-      console.log(`Pt é menor que 5: ${pt < 5}`);
-      console.log(`Pt é igual a 5: ${pt == 5}`);
-      console.log(`Pt é maior que 5: ${pt > 5}`);
-      console.log(`Pt é maior ou igual a 5: ${pt >= 5}`);
-      console.log(`Pt é menor ou igual a 5: ${pt <= 5}`);
-      kiddo.day();
-      td = kiddo.trainingDay;
+    forceDay = pt + forceDay;
+    abilityDay = pt + abilityDay;
+    wisdowDay = pt + wisdowDay;
+    resistanceDay = pt + resistanceDay;
 
-      prompt(`\n\n\t=> Pressione ENTER continuar: \n\n`);
-      console.clear();
-    }
-    console.log(
-      `\n\nVocê não treinou o bastante para o combate. Treine novamente\n\n`
-    );
+    kiddo.forceSum();
+    kiddo.abilitySum();
+    kiddo.wisdowSum();
+    kiddo.resistanceSum();
+
+    console.log(`\n\n\nSTATUS ATUAL\n`);
+    console.log(`Você treinou ${kiddo.trainingDay} dia(s).`);
+    console.log(`Sua força é ${kiddo.force}`);
+    console.log(`Sua habilidade é ${kiddo.ability}`);
+    console.log(`Sua sabedoria é ${kiddo.wisdow}`);
+    console.log(`Sua resistência é ${kiddo.resistance}`);
+
+    kiddo.day();
+    td = kiddo.trainingDay;
+
+    prompt(`\n\n\t=> Pressione ENTER para continuar: \n\n`);
+    console.clear();
   }
 
   var media = statusMedia(
@@ -356,14 +343,20 @@ while (true) {
     kiddo.resistance
   ).toFixed(0);
 
-  console.log(
-    `Seu teinamento chegou ao fim. Você treinou o suficiente para lutar ${media} rounds contra o lutador X`
-  );
-  prompt(`\n\n\t=> Pressione ENTER continuar: \n\n`);
-  combate();
-  newgame = prompt(
-    `Se quiser jogar novamente digite SIM, caso contrário, digite qualquer tecla: `
-  )
+  if (pt < 5) {
+    console.log(
+      `\n\nVocê não treinou o bastante para o combate. Treine novamente se quiser enfrentar o lutador X\n\n`
+    );
+    break;
+  } else {
+    console.log(
+      `Você está pronta. Você treinou o suficiente para lutar ${media} rounds contra o lutador X`
+    );
+    prompt(`\n\n\t=> Pressione ENTER para continuar: \n\n`);
+    combate();
+  }
+
+  newgame = prompt(`Digite qualquer tecla para encerrar o jogo: `)
     .trim()
     .toUpperCase();
 
@@ -371,4 +364,5 @@ while (true) {
     break;
   }
 }
+
 console.log(`\n\tFim do Jogo. Até a próxima!\n\n`);
