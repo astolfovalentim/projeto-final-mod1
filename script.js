@@ -242,6 +242,14 @@ function statusMedia(a, b, c, d) {
   return calcStatusMedia;
 }
 
+// Função para calculo de pontos
+function points() {
+  forceDay = pt + forceDay;
+  abilityDay = pt + abilityDay;
+  wisdowDay = pt + wisdowDay;
+  resistanceDay = pt + resistanceDay;
+}
+
 // OBJETOS
 
 // Objeto Status do jogador
@@ -312,10 +320,7 @@ while (true) {
 
     quest();
 
-    forceDay = pt + forceDay;
-    abilityDay = pt + abilityDay;
-    wisdowDay = pt + wisdowDay;
-    resistanceDay = pt + resistanceDay;
+    points();
 
     kiddo.forceSum();
     kiddo.abilitySum();
