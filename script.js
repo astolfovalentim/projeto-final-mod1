@@ -45,6 +45,7 @@ let abilityDay = 0;
 let wisdowDay = 0;
 let resistanceDay = 0;
 let td = 0; // >>>>>> Variável para controle da passagem do tempo <<<<<<<<
+let newgame = 0;
 
 // Textos-----------------------------------------------------------------------------------------------------------------
 
@@ -285,76 +286,89 @@ const kiddo = {
 
 // Console ---------------------------------------------------------------------------------------------------------------
 
-// Introdução
-console.clear();
-console.log(background);
-prompt(`\n  => Pressione ENTER para o status atual dos seus atributos: \n\n`);
-console.clear();
+while (true) {
+  // Introdução
 
-//Tela de Status dos atributos
-console.log(screenStatusAttributes);
-kiddo.forceSum();
-kiddo.abilitySum();
-kiddo.wisdowSum();
-kiddo.resistanceSum();
-console.log(` \tSua força é ${kiddo.force};`);
-console.log(` \n\tSua habilidade é ${kiddo.ability};`);
-console.log(` \n\tSua sabedoria é ${kiddo.wisdow};`);
-console.log(` \n\tSua resistência é ${kiddo.resistance};`);
-prompt(`\n\n\t=> Pressione ENTER continuar: \n\n`);
-console.clear();
+  console.clear();
+  console.log(background);
+  prompt(`\n  => Pressione ENTER para o status atual dos seus atributos: \n\n`);
+  console.clear();
 
-//Dia de treinamento 0 -------------------------------------------------------------
-pt = 0;
-while (pt < 5) {
-  while (td < 5) {
-    console.log(`>>>> Dia de treinamento ${td} <<<<\n\n`);
-    console.log(intros[td]);
-    quest();
+  //Tela de Status dos atributos
+  console.log(screenStatusAttributes);
+  kiddo.forceSum();
+  kiddo.abilitySum();
+  kiddo.wisdowSum();
+  kiddo.resistanceSum();
+  console.log(` \tSua força é ${kiddo.force};`);
+  console.log(` \n\tSua habilidade é ${kiddo.ability};`);
+  console.log(` \n\tSua sabedoria é ${kiddo.wisdow};`);
+  console.log(` \n\tSua resistência é ${kiddo.resistance};`);
+  prompt(`\n\n\t=> Pressione ENTER continuar: \n\n`);
+  console.clear();
 
-    forceDay = pt + forceDay;
-    abilityDay = pt + abilityDay;
-    wisdowDay = pt + wisdowDay;
-    resistanceDay = pt + resistanceDay;
+  //Dia de treinamento 0 -------------------------------------------------------------
+  pt = 0;
+  while (pt < 5) {
+    while (td < 5) {
+      console.log(`>>>> Dia de treinamento ${td} <<<<\n\n`);
+      console.log(intros[td]);
+      quest();
 
-    kiddo.forceSum();
-    kiddo.abilitySum();
-    kiddo.wisdowSum();
-    kiddo.resistanceSum();
-    console.log(`Você treinou ${kiddo.trainingDay} dia(s).`);
-    console.log(`\n\n\nSua força é ${kiddo.force}`);
-    console.log(`Sua habilidade é ${kiddo.ability}`);
-    console.log(`Sua sabedoria é ${kiddo.wisdow}`);
-    console.log(`Sua resistência é ${kiddo.resistance}`);
+      forceDay = pt + forceDay;
+      abilityDay = pt + abilityDay;
+      wisdowDay = pt + wisdowDay;
+      resistanceDay = pt + resistanceDay;
 
-    // teste
-    console.log(`O pt é ${pt}`);
-    console.log(`O td é ${td}`);
-    console.log(`Pt é menor que 5: ${pt < 5}`);
-    console.log(`Pt é igual a 5: ${pt == 5}`);
-    console.log(`Pt é maior que 5: ${pt > 5}`);
-    console.log(`Pt é maior ou igual a 5: ${pt >= 5}`);
-    console.log(`Pt é menor ou igual a 5: ${pt <= 5}`);
-    kiddo.day();
-    td = kiddo.trainingDay;
+      kiddo.forceSum();
+      kiddo.abilitySum();
+      kiddo.wisdowSum();
+      kiddo.resistanceSum();
+      console.log(`Você treinou ${kiddo.trainingDay} dia(s).`);
+      console.log(`\n\n\nSua força é ${kiddo.force}`);
+      console.log(`Sua habilidade é ${kiddo.ability}`);
+      console.log(`Sua sabedoria é ${kiddo.wisdow}`);
+      console.log(`Sua resistência é ${kiddo.resistance}`);
 
-    prompt(`\n\n\t=> Pressione ENTER continuar: \n\n`);
-    console.clear();
+      // teste
+      console.log(`O pt é ${pt}`);
+      console.log(`O td é ${td}`);
+      console.log(`Pt é menor que 5: ${pt < 5}`);
+      console.log(`Pt é igual a 5: ${pt == 5}`);
+      console.log(`Pt é maior que 5: ${pt > 5}`);
+      console.log(`Pt é maior ou igual a 5: ${pt >= 5}`);
+      console.log(`Pt é menor ou igual a 5: ${pt <= 5}`);
+      kiddo.day();
+      td = kiddo.trainingDay;
+
+      prompt(`\n\n\t=> Pressione ENTER continuar: \n\n`);
+      console.clear();
+    }
+    console.log(
+      `\n\nVocê não treinou o bastante para o combate. Treine novamente\n\n`
+    );
   }
+
+  var media = statusMedia(
+    kiddo.force,
+    kiddo.ability,
+    kiddo.wisdow,
+    kiddo.resistance
+  ).toFixed(0);
+
   console.log(
-    `\n\nVocê não treinou o bastante para o combate. Treine novamente\n\n`
+    `Seu teinamento chegou ao fim. Você treinou o suficiente para lutar ${media} rounds contra o lutador X`
   );
+  prompt(`\n\n\t=> Pressione ENTER continuar: \n\n`);
+  combate();
+  newgame = prompt(
+    `Se quiser jogar novamente digite SIM, caso contrário, digite qualquer tecla: `
+  )
+    .trim()
+    .toUpperCase();
+
+  if (newgame != "SIM") {
+    break;
+  }
 }
-
-const media = statusMedia(
-  kiddo.force,
-  kiddo.ability,
-  kiddo.wisdow,
-  kiddo.resistance
-).toFixed(0);
-
-console.log(
-  `Seu teinamento chegou ao fim. Você treinou o suficiente para lutar ${media} rounds contra o lutador X`
-);
-prompt(`\n\n\t=> Pressione ENTER continuar: \n\n`);
-combate();
+console.log(`\n\tFim do Jogo. Até a próxima!\n\n`);
